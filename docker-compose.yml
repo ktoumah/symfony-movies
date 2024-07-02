@@ -1,0 +1,54 @@
+version: '3'
+
+networks:
+  symfony_movies_network:
+
+services:
+
+  nginx_service:
+    image: nginx:stable-alpine
+    container_name: nginx_movies_v2_container
+    ports:
+      - "8004:80"
+    volumes:
+      - ./:/var/www/app
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - mysql_service_movies
+      - php_service
+    networks:
+      - symfony_movies_network
+
+  php_service:
+    container_name: php_movies_v2_container
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    build:
+      context: .
+      dockerfile: ./docker/php/Dockerfile
+    ports:
+      - "9002:9000"
+    volumes:
+      - ./:/var/www/app
+    networks:
+      - symfony_movies_network
+
+  mysql_service_movies:
+    image: mysql:8
+    container_name: mysql_movies_v2_container
+    ports:
+      - "4308:3306"
+    volumes:
+      - db-data:/var/lib/mysql:rw
+      - ./docker/mysql/data:/data:rw
+    command: ["--mysql-native-password=ON"]
+#    command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    restart: always # always restart unless stopped manually
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_PASSWORD: root
+    networks:
+      - symfony_movies_network
+
+volumes:
+  db-data:
