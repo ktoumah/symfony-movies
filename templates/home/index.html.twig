@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello BackofficeController!{% endblock %}
+{% block title %}Hello HomeController!{% endblock %}
 
 {% block body %}
 <style>
@@ -13,8 +13,7 @@
 
     This friendly message is coming from:
     <ul>
-        <li>Your controller at <code>/var/www/app/src/Controller/BackofficeController.php</code></li>
-        <li>Your template at <code>/var/www/app/templates/backoffice/index.html.twig</code></li>
+        <li><a href="{{ path('login') }}">Connexion</a></li>
     </ul>
 </div>
 {% endblock %}

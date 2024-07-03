@@ -81,6 +81,7 @@
       <path value="$PROJECT_DIR$/vendor/symfony/twig-bridge" />
       <path value="$PROJECT_DIR$/vendor/symfony/translation-contracts" />
       <path value="$PROJECT_DIR$/vendor/twig/twig" />
+      <path value="$PROJECT_DIR$/vendor/symfony/web-profiler-bundle" />
     </include_path>
   </component>
   <component name="ProjectId" id="2ih7Pwg8AgwuJTCsoVspe790NKz" />
@@ -91,7 +92,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/Exception/User" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/templates/movies" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php" />
     <property name="vue.rearranger.settings.migration" value="true" />
@@ -101,6 +102,7 @@
       <recent name="\\wsl$\Ubuntu-20.04\home\webapps\symfony-movies\src" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="\\wsl$\Ubuntu-20.04\home\webapps\symfony-movies\templates\movies" />
       <recent name="\\wsl$\Ubuntu-20.04\home\webapps\symfony-movies\src\Exception\User" />
       <recent name="\\wsl$\Ubuntu-20.04\home\webapps\symfony-movies\docker\build" />
       <recent name="\\wsl$\Ubuntu-20.04\home\webapps\symfony-movies\docker\dockerFiles" />
@@ -158,9 +160,9 @@
       <screen x="6" y="-1080" width="1920" height="1032" />
     </state>
     <state x="98" y="-988" width="1736" height="848" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1536.816/6.-1080.1920.1032@6.-1080.1920.1032" timestamp="1719933127861" />
-    <state x="236" y="-986" width="1400" height="784" key="find.popup" timestamp="1719935529107">
+    <state x="236" y="-986" width="1400" height="784" key="find.popup" timestamp="1719998842520">
       <screen x="6" y="-1080" width="1920" height="1032" />
     </state>
-    <state x="236" y="-986" width="1400" height="784" key="find.popup/0.0.1536.816/6.-1080.1920.1032@6.-1080.1920.1032" timestamp="1719935529107" />
+    <state x="236" y="-986" width="1400" height="784" key="find.popup/0.0.1536.816/6.-1080.1920.1032@6.-1080.1920.1032" timestamp="1719998842520" />
   </component>
 </project>

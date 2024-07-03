@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MoviesController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Détail de {{ movie.name }}</h1>
+    <p>
+        <strong>Description:</strong> {{ movie.overview.value }}<br>
+        <strong>Langue originale:</strong> {{ movie.originalLanguage }}<br>
+        <strong>Popularité:</strong> {{ movie.popularity }}<br>
+        <strong>Note moyenne:</strong> {{ movie.voteAverage }}<br>
+        <strong>Nombre de votes:</strong> {{ movie.voteCount }}<br>
+    </p>
+    <p>
+        <img src="https://image.tmdb.org/t/p/w500/{{ movie.posterPath }}" alt="{{ movie.name }}" style="max-width: 300px;">
+    </p>
+    <a href="{{ path('app_movies') }}">Back to list</a>
+</div>
+{% endblock %}
