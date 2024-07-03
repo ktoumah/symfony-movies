@@ -21,6 +21,7 @@
     <p>
         <img src="https://image.tmdb.org/t/p/w500/{{ movie.posterPath }}" alt="{{ movie.name }}" style="max-width: 300px;">
     </p>
+    <a href="{{ path('movie_edit', {id: movie.id}) }}">Modifier</a> |
     <a href="{{ path('app_movies') }}">Back to list</a>
 </div>
 {% endblock %}

@@ -14,7 +14,7 @@
         <thead>
         <tr>
             <th>Poster</th>
-            <th>Nom</th>
+            <th>Titre</th>
             <th>Langue originale</th>
             <th>Popularité</th>
             <th>Note moyenne</th>
@@ -38,6 +38,10 @@
                 <td>{{ movie.voteAverage }}</td>
                 <td>{{ movie.voteCount }}</td>
                 <td>{{ movie.releaseDate|date('d/m/Y') }}</td>
+                <td>
+                    <a href="{{ path('movie_edit', {id: movie.id}) }}">Modifier</a> |
+                    <a href="{{ path('movie_delete', {id: movie.id}) }}">Supprimer</a>
+                </td>
             </tr>
         {% else %}
             <tr>
@@ -46,5 +50,8 @@
         {% endfor %}
         </tbody>
     </table>
+    <div class="navigation">
+        {{ knp_pagination_render(movies) }}
+    </div>
 </div>
 {% endblock %}
