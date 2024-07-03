@@ -16,6 +16,7 @@
         <strong>Popularité:</strong> {{ movie.popularity }}<br>
         <strong>Note moyenne:</strong> {{ movie.voteAverage }}<br>
         <strong>Nombre de votes:</strong> {{ movie.voteCount }}<br>
+        <strong>Date de sortie:</strong> {{ movie.releaseDate|date('d/m/Y') }}<br>
     </p>
     <p>
         <img src="https://image.tmdb.org/t/p/w500/{{ movie.posterPath }}" alt="{{ movie.name }}" style="max-width: 300px;">

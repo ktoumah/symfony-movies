@@ -32,7 +32,7 @@ class CreateUser
         $user = new User();
         $user
             ->setEmail($email)
-            ->setRoles([User::ROLE_USER]) // Just a static role for this example
+            ->setRoles([User::ROLE_USER]) // Imagnie that we have just one role for this example
             ->setPassword($this->passwordUpdater->encodePassword($user, $password));
         $this->entityManager->persist($user);
         $this->entityManager->flush();

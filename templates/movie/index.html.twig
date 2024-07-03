@@ -19,21 +19,29 @@
             <th>Popularité</th>
             <th>Note moyenne</th>
             <th>Nombre de votes</th>
+            <th>Date de sortie</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
         {% for movie in movies %}
             <tr>
-                <td><img src="https://image.tmdb.org/t/p/w500/{{ movie.posterPath }}" alt="{{ movie.name }}" style="max-width: 100px;"></td>
-                <td><a href="{{ path('movie_show', {id: movie.id}) }}">{{ movie.name }}</a></td>
+                <td>
+                    <a href="{{ path('movie_show', {id: movie.id}) }}">
+                        <img src="https://image.tmdb.org/t/p/w500{{ movie.backdropPath }}"
+                             alt="{{ movie.name }}" style="max-width: 100px;">
+                    </a>
+                </td>
+                <td>{{ movie.name }}</td>
                 <td>{{ movie.originalLanguage }}</td>
                 <td>{{ movie.popularity }}</td>
                 <td>{{ movie.voteAverage }}</td>
                 <td>{{ movie.voteCount }}</td>
+                <td>{{ movie.releaseDate|date('d/m/Y') }}</td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="6">Aucun enregistrement.</td>
+                <td colspan="8">Aucun enregistrement.</td>
             </tr>
         {% endfor %}
         </tbody>

@@ -3,11 +3,15 @@
 namespace App\Entity;
 
 use App\Repository\MovieRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: MovieRepository::class)]
 class Movie
 {
+    const TIME_WINDOW_DAY = "day";
+    const TIME_WINDOW_WEEK = "week";
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -36,6 +40,12 @@ class Movie
 
     #[ORM\Column(nullable: true)]
     private ?int $voteCount = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $backdropPath = null;
+
+    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $releaseDate = null;
 
     public function getId(): ?int
     {
@@ -141,5 +151,34 @@ class Movie
         $this->voteCount = $voteCount;
 
         return $this;
+    }
+
+    public function getBackdropPath(): ?string
+    {
+        return $this->backdropPath;
+    }
+
+    public function setBackdropPath(?string $backdropPath): static
+    {
+        $this->backdropPath = $backdropPath;
+
+        return $this;
+    }
+
+    public function getReleaseDate(): ?\DateTimeInterface
+    {
+        return $this->releaseDate;
+    }
+
+    public function setReleaseDate(?\DateTimeInterface $releaseDate): static
+    {
+        $this->releaseDate = $releaseDate;
+
+        return $this;
+    }
+
+    public static function getAllTimes(): array
+    {
+        return [self::TIME_WINDOW_DAY, self::TIME_WINDOW_WEEK];
     }
 }

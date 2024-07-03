@@ -11,7 +11,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-#[AsCommand(name: 'add-user', description: 'Add a short description for your command')]
+#[AsCommand(name: 'add-user', description: 'This command allow to add user to database with a hashed password')]
 class AddUserCommand extends Command
 {
     private CreateUser $createUser;
