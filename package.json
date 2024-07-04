@@ -7,6 +7,7 @@
     "core-js": "^3.23.0",
     "postcss-loader": "^7.3.4",
     "regenerator-runtime": "^0.13.9",
+    "tailwindcss": "^3.4.4",
     "webpack": "^5.74.0",
     "webpack-cli": "^4.10.0",
     "webpack-notifier": "^1.15.0"
@@ -21,13 +22,13 @@
   },
   "dependencies": {
     "autoprefixer": "^10.4.19",
-    "postcss": "^8.4.39",
-    "tailwindcss": "^3.4.4"
+    "flowbite": "^2.4.1",
+    "postcss": "^8.4.39"
   },
   "name": "app",
   "version": "1.0.0",
   "main": "postcss.config.js",
   "keywords": [],
   "author": "",
-  "description": ""
+  "description": "This project is a Symfony 7 test."
 }

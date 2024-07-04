@@ -4,58 +4,79 @@
 
 {% block body %}
 
-    <div class="example-wrapper py-12 px-4">
-        <h1 class="text-3xl font-bold mb-6">Liste des films</h1>
 
-        <div class="overflow-x-auto">
-            <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
-                <thead class="bg-gray-200 text-gray-700">
-                <tr>
-                    <th class="px-4 py-2">Poster</th>
-                    <th class="px-4 py-2">Titre</th>
-                    <th class="px-4 py-2">Langue originale</th>
-                    <th class="px-4 py-2">Popularité</th>
-                    <th class="px-4 py-2">Note moyenne</th>
-                    <th class="px-4 py-2">Nombre de votes</th>
-                    <th class="px-4 py-2">Date de sortie</th>
-                    <th class="px-4 py-2"></th>
+
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg py-12 px-4">
+        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-16 py-3">
+                    <span class="sr-only">Image</span>
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Titre
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Langue originale
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Popularité
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Note moyenne
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Nombre de votes
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Date de sortie
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Action
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for movie in movies %}
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                    <td class="p-4">
+                        <a href="{{ path('movie_show', {id: movie.id}) }}">
+                            <img src="https://image.tmdb.org/t/p/w500{{ movie.backdropPath }}" class="w-16 md:w-32 max-w-full max-h-full" alt="Apple Watch">
+                        </a>
+                    </td>
+                    <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
+                        {{ movie.name }}
+                    </td>
+                    <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
+                        {{ movie.originalLanguage }}
+                    </td>
+                    <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
+                        {{ movie.popularity }}
+                    </td>
+                    <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
+                        {{ movie.voteAverage }}
+                    </td>
+                    <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
+                        {{ movie.voteCount }}
+                    </td>
+                    <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
+                        {{ movie.releaseDate|date('d/m/Y') }}
+                    </td>
+                    <td class="px-6 py-4">
+                        <a href="{{ path('movie_edit', {id: movie.id}) }}" class="font-medium text-red-600 dark:text-red-500 hover:underline">Modifier</a> |
+                        <a href="{{ path('movie_delete', {id: movie.id}) }}" class="font-medium text-red-600 dark:text-red-500 hover:underline">Supprimer</a>
                 </tr>
-                </thead>
-                <tbody class="text-gray-600">
-                {% for movie in movies %}
-                    <tr class="hover:bg-gray-100">
-                        <td class="px-4 py-2">
-                            <a href="{{ path('movie_show', {id: movie.id}) }}">
-                                <img src="https://image.tmdb.org/t/p/w500{{ movie.backdropPath }}"
-                                     alt="{{ movie.name }}" class="max-w-full h-auto" style="max-width: 100px;">
-                            </a>
-                        </td>
-                        <td class="px-4 py-2">{{ movie.name }}</td>
-                        <td class="px-4 py-2">{{ movie.originalLanguage }}</td>
-                        <td class="px-4 py-2">{{ movie.popularity }}</td>
-                        <td class="px-4 py-2">{{ movie.voteAverage }}</td>
-                        <td class="px-4 py-2">{{ movie.voteCount }}</td>
-                        <td class="px-4 py-2">{{ movie.releaseDate|date('d/m/Y') }}</td>
-                        <td class="px-4 py-2">
-                            <a href="{{ path('movie_edit', {id: movie.id}) }}" class="text-blue-600 hover:text-blue-800">Modifier</a>
-                            |
-                            <a href="{{ path('movie_delete', {id: movie.id}) }}" class="text-red-600 hover:text-red-800">Supprimer</a>
-                        </td>
-                    </tr>
-                {% else %}
-                    <tr>
-                        <td colspan="8" class="text-center py-4">Aucun enregistrement.</td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        </div>
-
+            {% else %}
+                <tr>
+                    <td colspan="8" class="text-center py-4">Aucun enregistrement.</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
         <div class="mt-6">
             <div class="navigation">
                 {{ knp_pagination_render(movies) }}
             </div>
         </div>
     </div>
-
 {% endblock %}
