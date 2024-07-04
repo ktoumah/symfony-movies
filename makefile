@@ -11,7 +11,7 @@ run: ## Run the application
 		$(info The application is running on: $(API_URL)/.) \
 
 init: ## Install the application
-	make build start install_dependencies copy_env_file cp_pre_commit_file install_db
+	make build start copy_env_file cp_pre_commit_file install_dependencies install_db fix_folder_permissions
 
 build: ## Build images stack
 	docker-compose build
@@ -43,17 +43,17 @@ nginx_exec_cmd: nginx_start ## Execute commands in Nginx container
 	docker-compose run --rm nginx_service sh -c "${OPT}"
 
 install_dependencies:  ## Install dependencies
-	make app_exec_cmd OPT="composer install --no-interaction"
+	-make app_exec_cmd OPT="composer install --no-interaction"
 	make app_exec_cmd OPT="npm install -y"
 	make app_exec_cmd OPT="npm run build"
 
 install_db:  ## Create database and schema
-	if [ ! -f "./.env.local" ]; then \
-		echo 'DATABASE_URL="mysql://root:root@mysql_movies_v2_container:3306/movies_db"' > .env.local; \
-	fi
 	make app_exec_cmd OPT="php bin/console doctrine:database:drop --if-exists --force"
 	make app_exec_cmd OPT="php bin/console doctrine:database:create"
 	make db_exec_cmd OPT="mysql -u root -p'root' movies_db -e 'SET FOREIGN_KEY_CHECKS = 0; source /data/movies_db.sql; SET FOREIGN_KEY_CHECKS = 1;'"
+	make app_exec_cmd OPT="php bin/console doctrine:migrations:migrate --no-interaction"
+
+run_migrations:
 	make app_exec_cmd OPT="php bin/console doctrine:migrations:migrate --no-interaction"
 
 sh_app: app_start ## Connect to PHP container
@@ -86,6 +86,9 @@ cp_pre_commit_file: ## Copy pre-commit file to Git hooks folder
 
 check_code_style: ## Execute grumphp pre commit command to check code style
 	make app_exec_cmd OPT="./vendor/bin/grumphp git:pre-commit"
+
+fix_folder_permissions:
+	make app_exec_cmd OPT="chown -R www-data:www-data /var/www"
 
 help: ## Commands guide .
 	@awk -F ':|##' '/^[^\t].+?:.*?##/ {printf "\033[36m%-30s\033[0m %s\n", $$1, $$NF}' $(MAKEFILE_LIST)
