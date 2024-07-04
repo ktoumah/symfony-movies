@@ -11,7 +11,7 @@ run: ## Run the application
 		$(info The application is running on: $(API_URL)/.) \
 
 init: ## Install the application
-	make build start install_dependencies cp_pre_commit_file install_db
+	make build start install_dependencies copy_env_file cp_pre_commit_file install_db
 
 build: ## Build images stack
 	docker-compose build
@@ -44,6 +44,8 @@ nginx_exec_cmd: nginx_start ## Execute commands in Nginx container
 
 install_dependencies:  ## Install dependencies
 	make app_exec_cmd OPT="composer install --no-interaction"
+	make app_exec_cmd OPT="npm install -y"
+	make app_exec_cmd OPT="npm run build"
 
 install_db:  ## Create database and schema
 	if [ ! -f "./.env.local" ]; then \
@@ -71,6 +73,11 @@ db_start:
 
 cache_clear: ## Clear cache
 	make app_exec_cmd OPT="rm -rf var/cache"
+
+copy_env_file:
+	@if [ ! -f "./.env.dev.local" ]; then\
+		cp docker/build/config/.env.local.php ./.env.local.php;\
+	fi
 
 cp_pre_commit_file: ## Copy pre-commit file to Git hooks folder
 	rm -f .git/hooks/pre-commit
