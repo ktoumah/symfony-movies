@@ -4,50 +4,58 @@
 
 {% block body %}
 
-<div class="example-wrapper">
-    <h1>Liste des films</h1>
-    <table>
-        <thead>
-        <tr>
-            <th>Poster</th>
-            <th>Titre</th>
-            <th>Langue originale</th>
-            <th>Popularité</th>
-            <th>Note moyenne</th>
-            <th>Nombre de votes</th>
-            <th>Date de sortie</th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for movie in movies %}
-            <tr>
-                <td>
-                    <a href="{{ path('movie_show', {id: movie.id}) }}">
-                        <img src="https://image.tmdb.org/t/p/w500{{ movie.backdropPath }}"
-                             alt="{{ movie.name }}" style="max-width: 100px;">
-                    </a>
-                </td>
-                <td>{{ movie.name }}</td>
-                <td>{{ movie.originalLanguage }}</td>
-                <td>{{ movie.popularity }}</td>
-                <td>{{ movie.voteAverage }}</td>
-                <td>{{ movie.voteCount }}</td>
-                <td>{{ movie.releaseDate|date('d/m/Y') }}</td>
-                <td>
-                    <a href="{{ path('movie_edit', {id: movie.id}) }}">Modifier</a> |
-                    <a href="{{ path('movie_delete', {id: movie.id}) }}">Supprimer</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="8">Aucun enregistrement.</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-    <div class="navigation">
-        {{ knp_pagination_render(movies) }}
+    <div class="example-wrapper py-12 px-4">
+        <h1 class="text-3xl font-bold mb-6">Liste des films</h1>
+
+        <div class="overflow-x-auto">
+            <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+                <thead class="bg-gray-200 text-gray-700">
+                <tr>
+                    <th class="px-4 py-2">Poster</th>
+                    <th class="px-4 py-2">Titre</th>
+                    <th class="px-4 py-2">Langue originale</th>
+                    <th class="px-4 py-2">Popularité</th>
+                    <th class="px-4 py-2">Note moyenne</th>
+                    <th class="px-4 py-2">Nombre de votes</th>
+                    <th class="px-4 py-2">Date de sortie</th>
+                    <th class="px-4 py-2"></th>
+                </tr>
+                </thead>
+                <tbody class="text-gray-600">
+                {% for movie in movies %}
+                    <tr class="hover:bg-gray-100">
+                        <td class="px-4 py-2">
+                            <a href="{{ path('movie_show', {id: movie.id}) }}">
+                                <img src="https://image.tmdb.org/t/p/w500{{ movie.backdropPath }}"
+                                     alt="{{ movie.name }}" class="max-w-full h-auto" style="max-width: 100px;">
+                            </a>
+                        </td>
+                        <td class="px-4 py-2">{{ movie.name }}</td>
+                        <td class="px-4 py-2">{{ movie.originalLanguage }}</td>
+                        <td class="px-4 py-2">{{ movie.popularity }}</td>
+                        <td class="px-4 py-2">{{ movie.voteAverage }}</td>
+                        <td class="px-4 py-2">{{ movie.voteCount }}</td>
+                        <td class="px-4 py-2">{{ movie.releaseDate|date('d/m/Y') }}</td>
+                        <td class="px-4 py-2">
+                            <a href="{{ path('movie_edit', {id: movie.id}) }}" class="text-blue-600 hover:text-blue-800">Modifier</a>
+                            |
+                            <a href="{{ path('movie_delete', {id: movie.id}) }}" class="text-red-600 hover:text-red-800">Supprimer</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="8" class="text-center py-4">Aucun enregistrement.</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="mt-6">
+            <div class="navigation">
+                {{ knp_pagination_render(movies) }}
+            </div>
+        </div>
     </div>
-</div>
+
 {% endblock %}
