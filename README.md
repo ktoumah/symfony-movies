@@ -17,7 +17,7 @@ Just lunch this command from the source of project and the job will be done 😃
 
 > **(!)** There are some issues due to slow internet connexion when 
 >lunching `make run` command, 
->if you have an error please rerun the same command it will be fixed.
+>if you have an error please connect to a fast network and rerun the same command it will be fixed.
 
 > **(!)** If you want to access to php project container, run this command:
 >```bash
