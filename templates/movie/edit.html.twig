@@ -7,13 +7,13 @@
 {% block body %}
 
 <div>
-    <h1>Modification de {{ movie.name }}</h1>
-    <hr>
     <div class="bg-white max-w-lg mx-auto p-8 md:p-12 my-10 rounded-lg shadow-2xl">
+        <h1>Modification de {{ movie.name }}</h1>
+        <hr>
         {{ form_start(form, {'attr': {'class': 'flex flex-col'}}) }}
         {{ form_widget(form) }}
-        <a href="{{ path('app_movies') }}" class="bg-silver-800 hover:bg-purple-700 text-white font-bold py-2 rounded shadow-lg hover:shadow-xl transition duration-200">Retourner à la liste</a>
-        <button class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 rounded shadow-lg hover:shadow-xl transition duration-200">Enregistrer</button>
+        <a href="{{ path('app_movies') }}" class="text-center bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 rounded shadow-lg hover:shadow-xl transition duration-200 mb-1">Retourner à la liste</a>
+        <button class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 rounded shadow-lg hover:shadow-xl transition duration-200 mb-1">Enregistrer</button>
         {{ form_end(form) }}
     </div>
 </div>
