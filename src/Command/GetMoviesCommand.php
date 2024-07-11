@@ -3,8 +3,7 @@
 namespace App\Command;
 
 use App\Entity\Movie;
-use App\Service\ExternalAPI\MovieDBAPI;
-use App\Service\ExternalAPI\MovieDBResponseFormatter;
+use App\Service\ExternalAPI\MovieDBAPIInterface;
 use App\Service\ResponseFormatter\MovieResponseAPIFormatter;
 use App\Service\ResponseFormatter\OverviewResponseAPIFormatter;
 use Doctrine\ORM\EntityManagerInterface;
@@ -17,13 +16,13 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 #[AsCommand(name: 'get-movies', description: 'Get movies from MoviesDB API and store them in our DB')]
 class GetMoviesCommand extends Command
 {
-    private MovieDBAPI $movieDBAPI;
+    private MovieDBAPIInterface $movieDBAPI;
     private MovieResponseAPIFormatter $movieResponseAPIFormatter;
     private OverviewResponseAPIFormatter $overviewResponseAPIFormatter;
     private EntityManagerInterface $entityManager;
 
     public function __construct(
-        MovieDBAPI $movieDBAPI,
+        MovieDBAPIInterface $movieDBAPI,
         MovieResponseAPIFormatter $movieResponseAPIFormatter,
         OverviewResponseAPIFormatter $overviewResponseAPIFormatter,
         EntityManagerInterface $entityManager

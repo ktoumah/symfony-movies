@@ -9,15 +9,17 @@ use App\Exception\MovieDB\MovieDBResponseException;
 use Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
-class MovieDBAPI
+class MovieDBAPI implements MovieDBAPIInterface
 {
     private HttpClientInterface $httpClient;
+    private MovieDBBearerAuthenticationInterface $movieDBBearerAuthentication;
     private string $movie_db_v3_url;
     private string $movie_db_v3_token;
 
-    public function __construct(HttpClientInterface $httpClient, string $movie_db_v3_url, string $movie_db_v3_token)
+    public function __construct(HttpClientInterface $httpClient, MovieDBBearerAuthenticationInterface $movieDBBearerAuthentication, string $movie_db_v3_url, string $movie_db_v3_token)
     {
         $this->httpClient = $httpClient;
+        $this->movieDBBearerAuthentication = $movieDBBearerAuthentication;
         $this->movie_db_v3_url = $movie_db_v3_url;
         $this->movie_db_v3_token = $movie_db_v3_token;
     }
@@ -43,7 +45,7 @@ class MovieDBAPI
 
         try {
             $response = $this->httpClient->request('GET', "{$this->movie_db_v3_url}/trending/movie/{$timeWindow}?language=en-US", [
-                'headers' => $this->getHeaders(),
+                'headers' => $this->movieDBBearerAuthentication->getHeaders(),
             ]);
             $data = $response->toArray();
         } catch (\Exception $exception) {
@@ -63,7 +65,7 @@ class MovieDBAPI
 
         try {
             $response = $this->httpClient->request('GET', "{$this->movie_db_v3_url}/movie/{$id}?language=en-US", [
-                'headers' => $this->getHeaders(),
+                'headers' => $this->movieDBBearerAuthentication->getHeaders(),
             ]);
             $data = $response->toArray();
         } catch (\Exception $exception) {

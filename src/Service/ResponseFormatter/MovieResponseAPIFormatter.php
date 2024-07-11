@@ -4,7 +4,7 @@ namespace App\Service\ResponseFormatter;
 
 use App\Entity\Movie;
 
-class MovieResponseAPIFormatter
+class MovieResponseAPIFormatter implements MovieResponseAPIFormatterInterface
 {
     public function fromAPIToEntity(array $apiData): Movie
     {
