@@ -46,6 +46,8 @@ install_dependencies:  ## Install dependencies
 	-make app_exec_cmd OPT="composer install --no-interaction"
 	make app_exec_cmd OPT="npm install -y"
 	make app_exec_cmd OPT="npm run build"
+	make app_exec_cmd OPT="php bin/console import:require flowbite"
+	make app_exec_cmd OPT="php bin/console tailwind:build"
 
 install_db:  ## Create database and schema
 	make app_exec_cmd OPT="php bin/console doctrine:database:drop --if-exists --force"
